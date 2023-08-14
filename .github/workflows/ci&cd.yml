@@ -21,14 +21,9 @@ jobs:
       - name: Generate build # React Build
         run: npm run build
 
-      - name: deploy
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
         run: |
-          URL="${{ secrets.AWS_WEBHOOK_URL }}"
-          curl -X POST -d {} "$URL" -H "Content-Type: application/json"
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  # - name: deploy
-  #   run: |
-  #     URL="${{ secrets.AWS_WEBHOOK_URL }}"
-  #     curl -X POST -d {} "$URL" -H "Content-Type: application/json"
+          curl -X POST -d {} secrets.AWS_WEBHOOK_URL -H "Content-Type: application/json"
